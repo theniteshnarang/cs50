@@ -4,40 +4,29 @@ import java.util.Scanner;
 import java.lang.String;
 
 public class Caesar {
-   static int check(int k){
-        if(k>=26){
-            k= k%26;
-            return k;
+
+    static StringBuffer encrypt(String p, int key) {
+        StringBuffer result= new StringBuffer();
+        for (int i = 0; i < p.length(); i++) {
+            if(Character.isUpperCase(p.charAt(i))) {
+                char ch = (char)(((int) p.charAt(i) + key - 65) %26 + 65); //This is simple type casting.
+                result.append(ch);
+            }
+            else {
+                char ch = (char) (((int) p.charAt(i) + key - 97) % 26 + 97);
+                result.append(ch);
+            }
         }
-        else if(k<0){
-            System.out.println("Error: Enter positive integer");
-            System.exit(0);
-            return -1;
-        }
-        else
-            return k;
+        return result;
     }
+
     public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
         System.out.print("Enter key:");
         int key=sc.nextInt();
-        sc.nextLine();
-        key=check(key);
-        String plain;
-        int len;
-        char[] cipher;
-        int[] num;
+        sc.nextLine();  //To clear the buffer
         System.out.print("Enter plain text:");
-        plain = sc.nextLine();
-        len = plain.length();
-        cipher= new char[len];
-        num= new int[len];
-        System.out.print("Cipher Text: ");
-        for (int i = 0; i < len; i++) {
-            num[i] = (int)plain.charAt(i); //plain text conversion into int array
-            num[i] = num[i] + key;   //adding key to plain text
-            cipher[i] = (char) num[i]; //This is simple type casting.
-            System.out.print(cipher[i]);
-        }
+        String plain = sc.nextLine();
+        System.out.print("Cipher Text: "+ encrypt(plain,key));
     }
 }
