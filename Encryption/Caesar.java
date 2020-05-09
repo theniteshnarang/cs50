@@ -1,5 +1,6 @@
 package com.pset1.Encryption;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.lang.String;
 
@@ -21,9 +22,16 @@ public class Caesar {
     }
 
     public static void main(String[] args) {
+        int key=0;
         Scanner sc= new Scanner(System.in);
-        System.out.print("Enter key:");
-        int key=sc.nextInt();
+        do{
+        try {
+                System.out.print("Enter key:");
+                key = sc.nextInt();
+        }catch(InputMismatchException e){
+                System.out.println("Please Enter Integer Value");
+                System.exit(0);
+        }}while (key<0);
         sc.nextLine();  //To clear the buffer
         System.out.print("Enter plain text:");
         String plain = sc.nextLine();
