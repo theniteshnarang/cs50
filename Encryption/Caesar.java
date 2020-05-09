@@ -6,21 +6,6 @@ import java.lang.String;
 
 public class Caesar {
 
-    static StringBuffer encrypt(String p, int key) {
-        StringBuffer result= new StringBuffer();
-        for (int i = 0; i < p.length(); i++) {
-            if(Character.isUpperCase(p.charAt(i))) {
-                char ch = (char)(((int) p.charAt(i) + key - 65) %26 + 65); //This is simple type casting.
-                result.append(ch);
-            }
-            else {
-                char ch = (char) (((int) p.charAt(i) + key - 97) % 26 + 97);
-                result.append(ch);
-            }
-        }
-        return result;
-    }
-
     public static void main(String[] args) {
         int key=0;
         Scanner sc= new Scanner(System.in);
@@ -36,5 +21,24 @@ public class Caesar {
         System.out.print("Enter plain text:");
         String plain = sc.nextLine();
         System.out.print("Cipher Text: "+ encrypt(plain,key));
+    }
+
+    static StringBuffer encrypt(String p, int key) {
+        StringBuffer result= new StringBuffer();
+        for (int i = 0; i < p.length(); i++) {
+            if(Character.isAlphabetic(p.charAt(i))){
+                if(Character.isUpperCase(p.charAt(i))) {
+                    char ch = (char)(((int) p.charAt(i) + key - 65) %26 + 65); //This is simple type casting.
+                    result.append(ch);
+                }
+                else {
+                    char ch = (char) (((int) p.charAt(i) + key - 97) % 26 + 97);
+                    result.append(ch);
+                }
+            }
+            else
+                result.append(p.charAt(i));
+        }
+        return result;
     }
 }
